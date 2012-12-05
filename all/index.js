@@ -7,7 +7,11 @@ module.exports = Generator;
 function Generator() {
   yeoman.generators.Base.apply( this, arguments );
   this.sourceRoot( path.join( __dirname, 'templates' ) );
-  this.appPermissions = {
+  this.files = {
+
+  };
+
+  this.liquid = {
   };
 }
 
@@ -17,88 +21,82 @@ Generator.prototype.askFor = function askFor( argument ) {
   var cb = this.async();
 
   var prompts = [{
-    name: 'appFullName',
-    message: 'What would you like to call this application?',
-    default: 'myChromeApp',
-    warning: 'You can change the default application name.'
+    name: 'microsite',
+    message: 'Are you building for a Microsite?',
+    default: 'y/N',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'appDescription',
-    message: 'How would you like to describe this application?',
-    default: 'My Chrome app',
-    warning: 'You can change the default app description.'
+    name: 'mobile',
+    message: 'Is this app mobile?',
+    default: 'y/N',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'unlimtedStoragePermission',
-    message: 'Would you like to use Storage in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'fbcanvas',
+    message: 'Are you building for FB Canvas?',
+    default: 'y/N',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'identityPermission',
-    message: 'Would you like to the experimental Identity API in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'sweepstakes',
+    message: 'Would you like to include a sweepstakes?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'browserTagPermission',
-    message: 'Would you like to use the Browser Tag in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions' 
+    name: 'gallery',
+    message: 'Would you like to include a gallery?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'videoCapturePermission',
-    message: 'Would you like to use the Camera in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'poll',
+    message: 'Will you be using the poll plugin?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'audioCapturePermission',
-    message: 'Would you like to use the Microphone in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'voting',
+    message: 'Will you be using the voting plugin?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'usbPermission',
-    message: 'Would you like to use USB in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'rssFeed',
+    message: 'Will you include an rss feed?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'bluetoothPermission',
-    message: 'Would you like to use Bluetooth in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'stories',
+    message: 'Will you include the stories plugin?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'serialPermission',
-    message: 'Would you like to use the Serial Port in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'signupForm',
+    message: 'Are you using a signup form?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'udpsendPermission',
-    message: 'Would you like to send UDP data in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'postToWall',
+    message: 'Will you include a post to wall button?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'udpbindPermission',
-    message: 'Would you like to receive UDP data in your app',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'sendAMessage',
+    message: 'Will you include a send to message button?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   },
   {
-    name: 'tcpPermission',
-    message: 'Would you like to use TCP in your app?',
-    default: "Y/n",
-    warning: 'You can change the permissions'
-  },
-  {
-    name: 'mediagalleryPermission',
-    message: 'Would you like to use the Media Gallery API in your app?',
-    default: "Y/n",
-    warning: 'You can change the permissions'
+    name: 'comments',
+    message: 'Will you include comments from Facebook?',
+    default: 'Y/n',
+    warning: 'You can always change your mind'
   }
 
   ];
@@ -107,29 +105,44 @@ Generator.prototype.askFor = function askFor( argument ) {
     if ( err ) {
       return this.emit( 'error', err );
     }
-    this.appFullName = props.appFullName;
-    this.appDescription = props.appDescription
-    this.appPermissions.serial = (/y/i).test(props.serialPermission);
-    this.appPermissions.identity = (/y/i).test(props.identityPermission);
-    this.appPermissions.unlimitedStorage = (/y/i).test(props.unlimitedStoragePermission);
-    this.appPermissions.usb = (/y/i).test(props.usbPermission);
-    this.appPermissions.bluetooth = (/y/i).test(props.bluetoothPermission);
-    this.appPermissions.browserTag = (/y/i).test(props.browserTagPermission);
-    this.appPermissions.audioCapture = (/y/i).test(props.audioCapturePermission);
-    this.appPermissions.videoCapture = (/y/i).test(props.videoCapturePermission);
+
+    this.files.microsite = (/y/i).test(props.microsite);
+    this.files.mobile = (/y/i).test(props.mobile);
+    this.files.fbcanvas = (/y/i).test(props.fbcanvas);
+    this.liquid.sweepstakes = (/y/i).test(props.sweepstakes);
+    this.liquid.gallery = (/y/i).test(props.gallery);
+    this.liquid.voting = (/y/i).test(props.voting);
+    this.liquid.poll = (/y/i).test(props.poll);
+    this.liquid.rssFeed = (/y/i).test(props.rssFeed);
+    this.liquid.stories = (/y/i).test(props.stories);
+    this.liquid.signUpForm = (/y/i).test(props.signUpForm);
+    this.liquid.postToWall = (/y/i).test(props.postToWall);
+    this.liquid.sendAMessage = (/y/i).test(props.sendAMessage);
+    this.liquid.comments = (/y/i).test(props.comments);
+
+    // this.appFullName = props.appFullName;
+    // this.appDescription = props.appDescription
+    // this.appPermissions.serial = (/y/i).test(props.serialPermission);
+    // this.appPermissions.identity = (/y/i).test(props.identityPermission);
+    // this.appPermissions.unlimitedStorage = (/y/i).test(props.unlimitedStoragePermission);
+    // this.appPermissions.usb = (/y/i).test(props.usbPermission);
+    // this.appPermissions.bluetooth = (/y/i).test(props.bluetoothPermission);
+    // this.appPermissions.browserTag = (/y/i).test(props.browserTagPermission);
+    // this.appPermissions.audioCapture = (/y/i).test(props.audioCapturePermission);
+    // this.appPermissions.videoCapture = (/y/i).test(props.videoCapturePermission);
     
-    var connections = [];
-    if((/y/i).test(props.udpbindPermission)) connections.push("udp-bind::8899");
-    if((/y/i).test(props.udpsendPermission)) connections.push("udp-send-to::8899");
-    if((/y/i).test(props.tcpPermission)) connections.push("tcp-connect");
+    // var connections = [];
+    // if((/y/i).test(props.udpbindPermission)) connections.push("udp-bind::8899");
+    // if((/y/i).test(props.udpsendPermission)) connections.push("udp-send-to::8899");
+    // if((/y/i).test(props.tcpPermission)) connections.push("tcp-connect");
 
 
     // Complex permission objects
-    if((/y/i).test(props.mediagalleryPermission))
-      this.appPermissions.mediaGalleries = { "mediaGalleries" : ["read", "allAutoDetected"] };
+    // if((/y/i).test(props.mediagalleryPermission))
+    //   this.appPermissions.mediaGalleries = { "mediaGalleries" : ["read", "allAutoDetected"] };
 
-    if(connections.length > 0)
-      this.appPermissions.socket = { 'socket': connections };
+    // if(connections.length > 0)
+    //   this.appPermissions.socket = { 'socket': connections };
 
     cb();
   }.bind( this ));

@@ -1,21 +1,22 @@
 {
-  "name": "generator-chromeapp",
+  "name": "generator-liquid",
   "version": "0.1.0",
-  "description": "Yeoman generator for Chrome App",
+  "description": "Yeoman generator for Pages on Wildfireapp",
   "keywords": [
     "yeoman",
     "generator",
-    "chrome",
-    "app"
+    "liquid",
+    "wildfire",
+    "wildfireapp"
   ],
-  "homepage": "https://github.com/yeoman/generator-chromeapp",
-  "bugs": "https://github.com/yeoman/generator-chromeapp/issues",
-  "author": "Chrome Developer Relations",
+  "homepage": "",
+  "bugs": "",
+  "author": "Donnie Conner",
   "main": "",
   "bin": "",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yeoman/generator-chromeapp.git"
+    "url": ""
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha test/test-*.js"
