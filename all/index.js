@@ -49,6 +49,11 @@ Generator.prototype.askFor = function askFor(argument){
     message: 'Are you developing a canvas page?',
     default: 'y/N',
     warning: 'This will create fbcanvas.liquid and fbcanvas.css'
+  },{
+    name: 'gallery',
+    message: 'Would you like to include a gallery?',
+    default: 'y/N',
+    warning: 'This will generate a gallery plugin'
   }];
 
   this.prompt(prompts, function(e, props){
@@ -57,28 +62,44 @@ Generator.prototype.askFor = function askFor(argument){
     self.mobile = (/y/i).test(props.mobile);
     self.microsite = (/y/i).test(props.microsite);
     self.fbcanvas = (/y/i).test(props.fbcanvas);
+    self.gallery = (/y/i).test(props.gallery);
 
     cb();
   });
 }
 
 Generator.prototype.createTemplate = function(){
-  this.template('default.liquid', 'default.liquid');
+  console.log(this.fbcanvas);
+  var data = this.buildData();
+
+  this.template('default.liquid', 'default.liquid', data);
   this.copy(path.join('assets','default.css'), path.join('assets','default.css'));
   this.copy(path.join('assets','global.css'), path.join('assets', 'global.css'));
 
   if (this.mobile){
-    this.template('mobile.liquid', 'mobile.liquid');
+    this.template('mobile.liquid', 'mobile.liquid', data);
     this.template(path.join('assets', 'mobile.css'), path.join('assets', 'mobile.css'));
   };
 
   if (this.microsite){
-    this.template('microsite.liquid', 'microsite.liquid');
+    this.template('microsite.liquid', 'microsite.liquid', data);
     this.template(path.join('assets', 'microsite.css'), path.join('assets', 'microsite.css'));
   };
 
   if (this.fbcanvas){
-    this.template('fbcanvas.liquid', 'fbcanvas.liquid');
+    this.template('fbcanvas.liquid', 'fbcanvas.liquid', data);
     this.template(path.join('assets', 'fbcanvas.css'), path.join('assets', 'fbcanvas.css'));
   };
 };
+
+Generator.prototype.buildData = function(){
+  var data = {
+    gallery: false
+  };
+
+  if (this.gallery){
+    data.gallery = true;
+  };
+
+  return data;
+}
