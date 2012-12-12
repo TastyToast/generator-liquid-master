@@ -1,0 +1,26 @@
+/*
+Fluid Grid System ~ Core CSS.
+*/
+
+/* CLEARFIX */
+.clearfix:after, .row:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix, .row { display:inline-block; }
+.clearfix, .row { display:block; }
+
+/* Box Sizing */
+* { 
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;  
+			box-sizing: border-box;
+}
+
+/* Grid */
+.container { margin:0 auto; width: 810px; overflow: hidden;}
+.row { position:relative; }
+
+img { max-width:100%; }
+
+/* Custom */
+.container {
+	background:#FFF 0 0 repeat;
+}
