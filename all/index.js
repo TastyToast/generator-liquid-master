@@ -62,6 +62,26 @@ Generator.prototype.askFor = function askFor(argument){
     message: 'Do you want to include a voting gallery?',
     default: 'y/N',
     warning: 'This will generate a voting gallery'
+  },{
+    name: 'stories',
+    message: 'Will you be including Facebook stories in this template?',
+    default: 'y/N',
+    warning: 'This will generate a stories plugin'
+  },{
+    name: 'posttowall',
+    message: 'Would you like to include a post to wall plugin?',
+    default: 'y/N',
+    warning: 'This will generate a Post To Wall plugin'
+  },{
+    name: 'sendamessage',
+    message: 'Would you like to include a send a message plugin?',
+    default: 'y/N',
+    warning: 'This will generate a Send a Message plugin'
+  },{
+    name: 'signup',
+    message: 'Would you like to include a signup form?',
+    default: 'y/N',
+    warning: 'This will generate a Signup form plugin'
   }];
 
   this.prompt(prompts, function(e, props){
@@ -72,7 +92,11 @@ Generator.prototype.askFor = function askFor(argument){
     self.redirect = (/y/i).test(props.redirect);
     self.gallery = (/y/i).test(props.gallery);
     self.sweepstakes = (/y/i).test(props.sweepstakes);
-    self.voting = (/y/i).test(props.voting)
+    self.voting = (/y/i).test(props.voting);
+    self.stories = (/y/i).test(props.stories);
+    self.posttowall = (/y/i).test(props.posttowall);
+    self.sendamessage = (/y/i).test(props.sendamessage);
+    self.signupform = (/y/i).test(props.signupform);
 
     cb();
   });
@@ -103,22 +127,14 @@ Generator.prototype.createTemplate = function(){
 
 Generator.prototype.buildData = function(){
   var data = {
-    gallery: false,
-    sweepstakes: false,
-    voting: false
+    gallery: (this.gallery) ? true : false,
+    sweepstakes: (this.sweepstakes) ? true : false,
+    voting: (this.voting) ? true : false,
+    stories: (this.stories) ? true : false,
+    posttowall: (this.posttowall) ? true : false,
+    sendamessage: (this.sendamessage) ? true : false
+    signupform: (this.signupform) ? true : false
   };
-
-  if (this.gallery){
-    data.gallery = true;
-  };
-
-  if (this.sweepstakes){
-    data.sweepstakes = true;
-  };
-
-  if (this.voting){
-    data.voting = true;
-  }
 
   return data;
 }

@@ -87,6 +87,61 @@
 			{% endmarker %}
 		</div>
 	</div>
+	<% } %><%if (stories === true) { %>
+	<div class="row">
+		<div class="stories-container">
+			{% plugin stories stories_settings %}
+			{% marker stories_settings %}
+			    {% if stories_settings.completed %}
+			        this is the gated content
+			    {% else %}
+			        {{ stories_settings.form }}
+			    {% endif %}
+			    {{ stories_settings.recent_activity }}
+			{% endmarker %}
+		</div>
+	</div>
+	<% } %><%if (posttowall === true) { %>
+	<div class="row">
+		<div class="post-to-wall-container">
+			{% plugin post_to_wall post_to_wall_settings %}
+			{% marker post_to_wall_settings %}
+				{{ post_to_wall_settings }}
+			{% endmarker %}
+		</div>
+	</div>
+	<% } %><%if (sendamessage === true) { %>
+	<div class="row">
+		<div class="send-a-message-container">
+			{% plugin send_a_message send_a_message_setttings %}
+			{% marker send_a_message_setttings %}
+				{{ send_a_message_setttings }}
+			{% endmarker %}
+		</div>
+	</div>
+	<% } %><%if (signupform === true) { %>
+	<div class="row">
+		<div class="signup-form-container">
+			{% plugin signup_form signup_form_settings %}
+			{% marker signup_form_settings %}
+			    {% for message in signup_form_settings.messages %}
+			        <span class="messages">{{ message.text }}</span>
+			    {% endfor %}
+			    {% if signup_form_settings.completed %}
+			        <!-- whatever alternate content to show -->
+			    {% else %}
+			        {% formblock signup_form_settings %}
+			            {% for field in signup_form_settings.fields %}
+			                {{ field.body }}
+			            {% endfor %}
+			            <div class="signup-submit-btn">
+				            {{ signup_form_settings.submit_button }}
+				        </div>
+			        {% endformblock %}
+			    {% endif %}
+			{% endmarker %}
+		</div>
+	</div>
 	<% } %>
 </div>
 
