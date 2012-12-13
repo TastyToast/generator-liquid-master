@@ -1,18 +1,93 @@
 <div class="container">
+	<h2>GENERATED WITH YEOMAN</h2>
+	<%if (gallery === true) { %>
 	<div class="row">
-		<h2>GENERATED WITH YEOMAN</h2>
-
-		<%if (gallery === true) { %>
+		<div class="gallery-container">
 			{% plugin gallery gallery-name %}
 			{% marker gallery-name %}
 			    {% for entry in gallery-name.entries %}
-			        {{ entry.body }}<br>
-			        {{ entry.description }}
-			        <hr>
+			    <div class="entry">
+				    <div class="entry-body">
+				        {{ entry.body }}
+				    </div>
+				    <div class="entry-description">
+				        {{ entry.description }}
+				    </div>
+				</div>
 			    {% endfor %}
 			{% endmarker %}
-		<% } %>
+		</div>
 	</div>
+	<% } %><%if (sweepstakes === true) { %>
+	<div class="row">
+		<div class="sweeps-container">
+			{% plugin sweeps sweeps_settings %}
+			{% marker sweeps_settings %}
+			 
+			    {% for message in sweeps_settings.messages %}
+			        {{ message.text }}
+			    {% endfor %}
+			     
+			    {% if sweeps_settings.has_ended %}
+			        {{ sweeps_settings.after_content }}
+			    {% elsif sweeps_settings.completed %}
+			        <!-- whatever alternate content to show -->
+			        {% if sweeps_settings.thank_you_code_result %}
+			            {{ sweeps_settings.thank_you_code_result }}
+			        {% endif %}
+			    {% elsif sweeps_settings.has_not_started %}
+			        {{ sweeps_settings.before_content }}
+			    {% else %}
+			        {% formblock sweeps_settings %}
+			            {% for field in sweeps_settings.fields %}
+			                {{ field.body }}
+			            {% endfor %}
+			            <div class="policy-container">
+			            	<div class="policy-checkbox">
+					            {{ sweeps_settings.policy_checkbox }}
+					        </div>
+					        <div class="submit-btn">
+					            {{ sweeps_settings.submit_button }}
+					        </div>
+				        </div>
+			        {% endformblock %}
+			    {% endif %}
+			{% endmarker %}
+		</div>
+	</div>
+	<% } %><%if (voting === true) { %>
+	<div class="row">
+		<div class="voting-gallery-container">
+			{% plugin voting voting_settings %}
+			{% marker voting_settings %}
+			    {% formblock voting_settings %}
+			        {% for entry in voting_settings.entries %}
+			        <div class="entry">
+			        	<div class="entry-body">
+				            {{ entry.body }}
+				        </div>
+			            {% if voting_settings.completed %}
+			                <!-- no more votes available for the plugin; show results -->
+			                <div class="entry-result">
+				                {{ entry.result }}
+				            </div>
+			            {% elsif entry.completed %}
+			                <!-- user has already voted on this entry; show a text or checkmark or something, but not the final results yet -->
+			                <p>Voted!</p>
+			            {% else %}
+			                <!-- user can vote on this entry -->
+			                <div class="vote-btn">
+				                {{ entry.vote_button }}
+				            </div>
+			            {% endif %}
+			        </div>
+			        {% endfor %}
+			        {{ voting_settings.share_confirmation }}
+			    {% endformblock %}
+			{% endmarker %}
+		</div>
+	</div>
+	<% } %>
 </div>
 
 <script type="text/javascript">

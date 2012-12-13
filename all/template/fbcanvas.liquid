@@ -1,26 +1,22 @@
-<div class="container">
-	<div class="row">
-		<h2>GENERATED WITH YEOMAN</h2>
-
-		<%if (gallery === true) { %>
-			{% plugin gallery gallery-name %}
-			{% marker gallery-name %}
-			    {% for entry in gallery-name.entries %}
-			        {{ entry.body }}<br>
-			        {{ entry.description }}
-			        <hr>
-			    {% endfor %}
-			{% endmarker %}
-		<% } %>
-	</div>
-</div>
-
+{% plugin rawtext mobile_url %}
+{% plugin rawtext tab_url %}
+ 
 <script type="text/javascript">
-	if (!window.console) window.console={log:function(){}};
-
-	(function($){
-		$(document).ready(function(){
-			// document is ready
-		});
-	})(jQuery);
+ 
+	$(document).ready(function(){
+	// DETECT IF ON MOBILE DEVICE. IF YES...
+ 
+		if( navigator.userAgent.match(/Android/i)
+			 || navigator.userAgent.match(/webOS/i)
+			 || navigator.userAgent.match(/iPhone/i)
+			 || navigator.userAgent.match(/iPad/i)
+			 || navigator.userAgent.match(/iPod/i)
+			 || navigator.userAgent.match(/BlackBerry/i)
+			 ){
+				top.location.href="{{ mobile_url }}"
+			} else {
+			 top.location.href="{{ tab_url }}";
+		};
+	});
+ 
 </script>
