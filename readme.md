@@ -1,4 +1,4 @@
-# Liquid App generator [![Build Status](https://travis-ci.org/tastytoast/generator-liquid-master.png)(https://travis-ci.org/tastytoast/[generator-liquid-master)
+# Liquid App generator [![Build Status](https://secure.travis-ci.org/TastyToast/generator-liquid-master.png?branch=master)](http://travis-ci.org/TastyToast/generator-liquid-master)
 
 Maintainer: [Donnie Conner](https://github.com/tastytoast)
 
