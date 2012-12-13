@@ -96,7 +96,7 @@ Generator.prototype.askFor = function askFor(argument){
     self.stories = (/y/i).test(props.stories);
     self.posttowall = (/y/i).test(props.posttowall);
     self.sendamessage = (/y/i).test(props.sendamessage);
-    self.signupform = (/y/i).test(props.signupform);
+    self.signup = (/y/i).test(props.signup);
 
     cb();
   });
@@ -132,8 +132,8 @@ Generator.prototype.buildData = function(){
     voting: (this.voting) ? true : false,
     stories: (this.stories) ? true : false,
     posttowall: (this.posttowall) ? true : false,
-    sendamessage: (this.sendamessage) ? true : false
-    signupform: (this.signupform) ? true : false
+    sendamessage: (this.sendamessage) ? true : false,
+    signup: (this.signup) ? true : false
   };
 
   return data;

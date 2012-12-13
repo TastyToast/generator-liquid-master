@@ -1,6 +1,6 @@
 {
-  "name": "generator-liquid",
-  "version": "0.1.0",
+  "name": "liquid-generator",
+  "version": "0.1.2",
   "description": "Yeoman generator for Pages on Wildfireapp",
   "keywords": [
     "yeoman",
@@ -9,17 +9,18 @@
     "wildfire",
     "wildfireapp"
   ],
-  "homepage": "",
-  "bugs": "",
+  "homepage": "https://github.com/TastyToast/generator-liquid-master",
+  "bugs": "https://github.com/TastyToast/generator-liquid-master/issues",
   "author": "Donnie Conner",
   "main": "",
   "bin": "",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/TastyToast/generator-liquid-master"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha test/test-*.js"
+    "test": "node node_modules/mocha/bin/mocha test/test-*.js",
+    "install": "python install.py"
   },
   "dependencies": {
     "yeoman": "*",
