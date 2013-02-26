@@ -9,10 +9,6 @@ generatorPath = '/usr/local/lib/node_modules/yo/node_modules/yeoman-generator/li
 currentDir = os.path.dirname(os.path.abspath(__file__))
 yeomanLiquidPath = os.path.join(generatorPath, 'liquid')
 
-print generatorPath
-print currentDir
-print yeomanLiquidPath
-
 # Check if Yeoman is installed
 if not os.path.isdir(generatorPath):
 	print 'It seems that Yeoman is not installed.'
