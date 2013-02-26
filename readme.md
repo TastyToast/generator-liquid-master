@@ -15,7 +15,7 @@ You may need to re-install the generator every time you update Yeoman.
 If the install script failed, here is how to install it manually:
 
 `cd /usr/local/lib/node_modules/yeoman/node_modules/yeoman-generators/lib/generators`
-`git clone git://github.com/romainberger/yeoman-wordpress.git` (you may need to run this with `sudo`)
+`git://github.com/TastyToast/generator-liquid-master.git` (you may need to run this with `sudo`)
 
 ###Uninstalling
 
